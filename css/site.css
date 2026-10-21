@@ -676,6 +676,25 @@ section { padding: 110px 0; }
 .review-card q { flex: 1; font-size: 16px; line-height: 1.6; quotes: "\201C" "\201D"; }
 .review-card .review-by { font-weight: 600; font-size: 14px; color: var(--ink); }
 
+/* Yelp's embedded reviews sit in the same card frame. Yelp controls what's
+   inside the frame; we only set its width. */
+.review-card--yelp { padding: 12px; justify-content: center; }
+.review-card--yelp:hover { transform: none; box-shadow: var(--shadow); }
+.review-card--yelp iframe { width: 100% !important; max-width: 100%; border: 0; }
+/* Shown until Yelp's script loads (or if it's blocked) */
+.review-card--yelp .yelp-review { display: block; padding: 16px; font-size: 15px; color: var(--muted); }
+.review-card--yelp .yelp-review::before {
+  content: "\f1e9"; /* fa-yelp */
+  font-family: FontAwesome;
+  display: block;
+  font-size: 22px;
+  color: #d32323;
+  margin-bottom: 8px;
+}
+.review-card--yelp .yelp-review a { color: var(--ink); font-weight: 600; }
+.review-card--yelp .yelp-review:has(iframe) { padding: 0; }
+.review-card--yelp .yelp-review:has(iframe)::before { content: none; }
+
 .review-sources {
   display: flex;
   flex-wrap: wrap;

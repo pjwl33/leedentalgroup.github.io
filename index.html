@@ -222,8 +222,8 @@
                 </div>
 
                 <!-- Patient reviews: auto-scrolling feed. Each card links to its source.
-                     To add a review, copy a .review-card <a> and change the text, name,
-                     source icon (fa-google / fa-yelp) and link. -->
+                     To add a Google review, copy a .review-card <a> and change the text, name
+                     and link. Yelp reviews must use Yelp's embed code (see below). -->
                 <div class="reviews">
                     <div class="reviews-head">
                         <span class="eyebrow">Kind words</span>
@@ -246,6 +246,17 @@
                                 <q>Fast and friendly service.</q>
                                 <span class="review-by">Gina C. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
                             </a>
+                            <!-- Yelp reviews: Yelp's official review embeds (from each review's Share > Embed review).
+                                 Yelp's script (loaded once from js/app.js) turns each one into Yelp's own card. -->
+                            <div class="review-card review-card--yelp">
+                                <span class="yelp-review" data-review-id="zldRb1SsfAeeRwAIJGNMpw" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=nM6CnBv9KgK_cweUhpXHTw" rel="nofollow noopener">Darrell P.</a>'s <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills?hrid=zldRb1SsfAeeRwAIJGNMpw" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/Wg0iFbn_qIs2-Ygv0c-cvA" rel="nofollow noopener">Lee Dental Group</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+                            </div>
+                            <div class="review-card review-card--yelp">
+                                <span class="yelp-review" data-review-id="StPW-w8GrZ_9wS5YPBy9_w" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=_rUqwWmLUfBTJUiAAeDYgA" rel="nofollow noopener">Paul L.</a>'s <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills?hrid=StPW-w8GrZ_9wS5YPBy9_w" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/Wg0iFbn_qIs2-Ygv0c-cvA" rel="nofollow noopener">Lee Dental Group</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+                            </div>
+                            <div class="review-card review-card--yelp">
+                                <span class="yelp-review" data-review-id="KWZH4RolTj6ElB1K1VcEpg" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=ih7kYeKClFIpuMl1NGxcbg" rel="nofollow noopener">Aga G.</a>'s <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills?hrid=KWZH4RolTj6ElB1K1VcEpg" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/Wg0iFbn_qIs2-Ygv0c-cvA" rel="nofollow noopener">Lee Dental Group</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+                            </div>
                         </div>
                     </div>
                     <div class="review-sources">

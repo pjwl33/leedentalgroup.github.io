@@ -107,6 +107,15 @@ $(document).ready(function() {
     track.style.setProperty('--review-duration', seconds + 's');
   });
 
+  // Load Yelp's embed script once, after the feed has been duplicated, so it
+  // turns every Yelp card (originals and copies) into Yelp's own review widget.
+  if (document.querySelector('.yelp-review')) {
+    var yelp = document.createElement('script');
+    yelp.src = 'https://www.yelp.com/embed/widgets.js';
+    yelp.async = true;
+    document.body.appendChild(yelp);
+  }
+
   // Collapse the mobile menu after tapping a quick-strip link
   $('.hero-strip a.page-scroll').on('click', function() {
     $('.navbar-collapse.in').collapse('hide');
