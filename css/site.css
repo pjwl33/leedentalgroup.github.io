@@ -32,7 +32,7 @@
   --reveal-stagger: 120ms;
 
   /* Review cards, styled to sit alongside Yelp's embedded reviews */
-  --review-card-width: 320px;
+  --review-card-width: 360px;
   --review-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --review-text: #333333;
   --review-muted: #666666;
@@ -681,6 +681,7 @@ section { padding: 110px 0; }
 
 .review-card--google {
   width: var(--review-card-width);
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -734,12 +735,19 @@ section { padding: 110px 0; }
 }
 .review-card--google:hover .rc-more { text-decoration: underline; }
 
-/* Yelp embeds: no frame of our own; Yelp's widget sets its own size. */
-.review-card--yelp iframe { border: 0; display: block; }
-/* Fallback shown until Yelp's script loads (or if it's blocked) */
-.review-card--yelp .yelp-review {
+/* Yelp embeds: Yelp's widget fills a fixed-width slot with no frame of our
+   own. Until the widget loads (or if it's blocked), a simple fallback card
+   with links to the review shows instead. */
+.review-card--yelp { width: var(--review-card-width); }
+.review-card--yelp iframe {
   display: block;
-  width: var(--review-card-width);
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border: 0;
+}
+.review-card--yelp:not(.is-loaded) .yelp-review {
+  display: block;
   background: var(--white);
   border: 1px solid var(--review-border);
   border-radius: var(--review-radius);
@@ -747,7 +755,7 @@ section { padding: 110px 0; }
   font-size: 14px;
   color: var(--review-muted);
 }
-.review-card--yelp .yelp-review::before {
+.review-card--yelp:not(.is-loaded) .yelp-review::before {
   content: "\f1e9"; /* fa-yelp */
   font-family: FontAwesome;
   display: block;
@@ -755,9 +763,11 @@ section { padding: 110px 0; }
   color: #d32323;
   margin-bottom: 8px;
 }
-.review-card--yelp .yelp-review a { color: var(--review-link); font-weight: 700; }
-.review-card--yelp .yelp-review:has(iframe) { width: auto; background: none; border: 0; padding: 0; }
-.review-card--yelp .yelp-review:has(iframe)::before { content: none; }
+.review-card--yelp:not(.is-loaded) .yelp-review a { color: var(--review-link); font-weight: 700; }
+.review-card--yelp.is-loaded .yelp-review { display: block; padding: 0; margin: 0; border: 0; background: none; }
+/* Hide Yelp's placeholder link text once its widget is showing */
+.review-card--yelp.is-loaded .yelp-review { font-size: 0; line-height: 0; }
+.review-card--yelp.is-loaded .yelp-review > a { display: none; }
 
 .review-sources {
   display: flex;
@@ -788,7 +798,7 @@ section { padding: 110px 0; }
 @media (max-width: 767px) {
   .reviews { margin-top: 64px; }
   .reviews-head h3 { font-size: 24px; }
-  .reviews { --review-card-width: 280px; }
+  .reviews { --review-card-width: 320px; }
 }
 
 .team-note {

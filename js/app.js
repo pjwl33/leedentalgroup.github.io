@@ -116,6 +116,17 @@ $(document).ready(function() {
     yelp.src = 'https://www.yelp.com/embed/widgets.js';
     yelp.async = true;
     document.body.appendChild(yelp);
+
+    // Once Yelp has added its widget to a card, switch off the fallback styling.
+    var markLoaded = function() {
+      $('.review-card--yelp').each(function() {
+        if (this.querySelector('iframe')) this.classList.add('is-loaded');
+      });
+    };
+    var feed = document.querySelector('.review-track');
+    if (feed && 'MutationObserver' in window) {
+      new MutationObserver(markLoaded).observe(feed, { childList: true, subtree: true });
+    }
   }
 
   // Collapse the mobile menu after tapping a quick-strip link
