@@ -27,6 +27,51 @@ $(document).ready(function() {
     }, 1200);
   });
 
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero background crossfade: load each slide's photo, then rotate.
+  var $slides = $('.hero-slide');
+  $slides.each(function() {
+    var src = this.getAttribute('data-bg');
+    if (src) this.style.backgroundImage = "url('" + src + "')";
+  });
+  if ($slides.length > 1 && !reduceMotion) {
+    var current = 0;
+    setInterval(function() {
+      if (document.hidden) return;
+      $slides.eq(current).removeClass('is-active');
+      current = (current + 1) % $slides.length;
+      $slides.eq(current).addClass('is-active');
+    }, 6500);
+  }
+
+  // Review feed: repeat the cards until one set is wider than the strip,
+  // then duplicate that set so the CSS scroll loops without a gap.
+  $('.review-marquee').each(function() {
+    var marquee = this;
+    var track = marquee.querySelector('.review-track');
+    var originals = Array.prototype.slice.call(track.children);
+    if (!originals.length) return;
+
+    function cloneInto(nodes) {
+      nodes.forEach(function(node) {
+        var copy = node.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        copy.setAttribute('tabindex', '-1');
+        copy.setAttribute('data-clone', '');
+        track.appendChild(copy);
+      });
+    }
+
+    var guard = 0;
+    while (track.scrollWidth < marquee.clientWidth && guard++ < 10) cloneInto(originals);
+    cloneInto(Array.prototype.slice.call(track.children));
+
+    // Keep a steady reading speed (~30px/s) whatever the number of reviews.
+    var seconds = Math.max(20, Math.round(track.scrollWidth / 2 / 30));
+    track.style.setProperty('--review-duration', seconds + 's');
+  });
+
   // Collapse the mobile menu after tapping a quick-strip link
   $('.hero-strip a.page-scroll').on('click', function() {
     $('.navbar-collapse.in').collapse('hide');
