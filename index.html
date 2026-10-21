@@ -17,9 +17,9 @@
 
         <!-- Icons and Fonts -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+        <!-- Pretendard: one typeface for both English and Korean text -->
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+        <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 
         <!-- Site CSS -->
         <link href="css/site.css" rel="stylesheet">
@@ -77,9 +77,9 @@
 
         <!-- Header -->
         <header class="hero">
-            <!-- Background photo carousel (decorative, not clickable).
+            <!-- Background photos: fade in one after another with a slow zoom-out (decorative, not clickable).
                  To add a photo: put a landscape image (~1920px wide) in
-                 img/header-imgs/ and add another <img> line below. -->
+                 img/header-imgs/ and run: python3 scripts/update-hero-photos.py -->
             <div class="hero-carousel" aria-hidden="true">
                 <div class="hero-track">
                     <img src="img/header-imgs/header-bg.jpg" alt="">
@@ -222,8 +222,8 @@
                 </div>
 
                 <!-- Patient reviews: auto-scrolling feed. Each card links to its source.
-                     To add a review, copy a .review-card <a> and change the text, name,
-                     source icon (fa-google / fa-yelp) and link. -->
+                     To add a Google review, copy a .review-card--google <a> and change the
+                     avatar initial, name and text. Yelp reviews must use Yelp's embed code (see below). -->
                 <div class="reviews">
                     <div class="reviews-head">
                         <span class="eyebrow">Kind words</span>
@@ -231,28 +231,53 @@
                     </div>
                     <div class="review-marquee">
                         <div class="review-track">
-                            <a class="review-card" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                            <a class="review-card review-card--google" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                                <span class="rc-head">
+                                    <span class="rc-biz">Lee Dental Group</span>
+                                    <span class="rc-source"><i class="fa fa-google" aria-hidden="true"></i> Google</span>
+                                </span>
+                                <span class="rc-reviewer"><span class="rc-avatar" aria-hidden="true">P</span><span class="rc-name">Paul M.</span></span>
                                 <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                                 <q>Best dentist I have ever been to. Absolutely amazing. &hellip; Highly recommend.</q>
-                                <span class="review-by">Paul M. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
+                                <span class="rc-more">Read more on Google</span>
                             </a>
-                            <a class="review-card" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                            <a class="review-card review-card--google" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                                <span class="rc-head">
+                                    <span class="rc-biz">Lee Dental Group</span>
+                                    <span class="rc-source"><i class="fa fa-google" aria-hidden="true"></i> Google</span>
+                                </span>
+                                <span class="rc-reviewer"><span class="rc-avatar" aria-hidden="true">S</span><span class="rc-name">Susan T.</span></span>
                                 <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                                 <q>There's hardly any reviews because no one wants to share her. She's wonderful.</q>
-                                <span class="review-by">Susan T. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
+                                <span class="rc-more">Read more on Google</span>
                             </a>
-                            <a class="review-card" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                            <a class="review-card review-card--google" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                                <span class="rc-head">
+                                    <span class="rc-biz">Lee Dental Group</span>
+                                    <span class="rc-source"><i class="fa fa-google" aria-hidden="true"></i> Google</span>
+                                </span>
+                                <span class="rc-reviewer"><span class="rc-avatar" aria-hidden="true">G</span><span class="rc-name">Gina C.</span></span>
                                 <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                                 <q>Fast and friendly service.</q>
-                                <span class="review-by">Gina C. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
+                                <span class="rc-more">Read more on Google</span>
                             </a>
+                            <!-- Yelp reviews: Yelp's official review embeds (from each review's Share > Embed review).
+                                 Yelp's script (loaded once from js/app.js) turns each one into Yelp's own card. -->
+                            <div class="review-card review-card--yelp">
+                                <span class="yelp-review" data-review-id="zldRb1SsfAeeRwAIJGNMpw" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=nM6CnBv9KgK_cweUhpXHTw" rel="nofollow noopener">Darrell P.</a>'s <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills?hrid=zldRb1SsfAeeRwAIJGNMpw" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/Wg0iFbn_qIs2-Ygv0c-cvA" rel="nofollow noopener">Lee Dental Group</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+                            </div>
+                            <div class="review-card review-card--yelp">
+                                <span class="yelp-review" data-review-id="StPW-w8GrZ_9wS5YPBy9_w" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=_rUqwWmLUfBTJUiAAeDYgA" rel="nofollow noopener">Paul L.</a>'s <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills?hrid=StPW-w8GrZ_9wS5YPBy9_w" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/Wg0iFbn_qIs2-Ygv0c-cvA" rel="nofollow noopener">Lee Dental Group</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+                            </div>
+                            <div class="review-card review-card--yelp">
+                                <span class="yelp-review" data-review-id="KWZH4RolTj6ElB1K1VcEpg" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=ih7kYeKClFIpuMl1NGxcbg" rel="nofollow noopener">Aga G.</a>'s <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills?hrid=KWZH4RolTj6ElB1K1VcEpg" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/Wg0iFbn_qIs2-Ygv0c-cvA" rel="nofollow noopener">Lee Dental Group</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+                            </div>
                         </div>
                     </div>
                     <div class="review-sources">
                         <span>Read more reviews on</span>
                         <a href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener"><i class="fa fa-google" aria-hidden="true"></i> Google</a>
                         <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills" target="_blank" rel="noopener"><i class="fa fa-yelp" aria-hidden="true"></i> Yelp</a>
-                        <a href="https://reviews.birdeye.com/lee-dental-group-177322611112690" target="_blank" rel="noopener"><i class="fa fa-commenting" aria-hidden="true"></i> Birdeye</a>
                     </div>
                 </div>
 
