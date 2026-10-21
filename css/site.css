@@ -255,12 +255,36 @@ a:hover, a:focus { color: var(--teal-dark); text-decoration: none; outline: none
   padding: 150px 0 160px;
   color: var(--white);
   background-color: var(--ink);
-  background-image:
-    linear-gradient(100deg, rgba(34, 34, 34, 0.86) 0%, rgba(34, 34, 34, 0.62) 55%, rgba(14, 91, 99, 0.55) 100%),
-    url("../img/header-bg.jpg");
+  overflow: hidden;
+}
+
+/* Crossfading background photos (rotated by js/app.js) */
+.hero-slides { position: absolute; inset: 0; z-index: 0; }
+.hero-slide {
+  position: absolute;
+  inset: 0;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 1.8s ease-in-out, transform 9s ease-out;
+}
+.hero-slide.is-active { opacity: 1; transform: scale(1); }
+
+/* Dark teal-tinted overlay above the photos so the text stays readable */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, rgba(34, 34, 34, 0.86) 0%, rgba(34, 34, 34, 0.62) 55%, rgba(14, 91, 99, 0.55) 100%);
+  pointer-events: none;
+}
+.hero > .container { position: relative; z-index: 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: none; transform: none; }
 }
 
 .hero-content { max-width: 680px; }
@@ -562,6 +586,99 @@ section { padding: 110px 0; }
 }
 .team-card h4 { font-size: 19px; margin: 0 0 4px; }
 .team-card p { color: var(--muted); font-size: 15px; }
+
+/* Review quote under a team member's profile */
+.stars { color: #f5b301; font-size: 14px; letter-spacing: 2px; display: block; }
+.via { color: var(--muted); font-weight: 500; font-size: 13px; margin-left: 6px; white-space: nowrap; }
+.via .fa { margin-right: 3px; }
+
+.team-quote {
+  display: block;
+  margin-top: 22px;
+  padding: 18px 22px;
+  border-left: 3px solid var(--teal);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--teal-tint);
+  color: var(--ink-soft);
+  text-align: left;
+  transition: background 0.2s;
+}
+.team-quote:hover, .team-quote:focus { background: rgba(24, 161, 175, 0.16); color: var(--ink-soft); }
+.team-quote q { display: block; font-style: italic; font-size: 16px; margin: 8px 0; quotes: "\201C" "\201D"; }
+.team-quote .quote-by { font-weight: 600; font-size: 14px; color: var(--ink); }
+.team-card .team-quote { margin-top: 18px; }
+
+/* Patient review feed */
+.reviews { margin-top: 88px; }
+.reviews-head { text-align: center; margin-bottom: 32px; }
+.reviews-head h3 { font-size: 30px; margin: 0; }
+
+.review-marquee {
+  overflow: hidden;
+  padding: 12px 0 28px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.review-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: review-scroll var(--review-duration, 40s) linear infinite;
+}
+.review-marquee:hover .review-track,
+.review-marquee:focus-within .review-track { animation-play-state: paused; }
+@keyframes review-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 12px)); } /* half the track + half the gap = one full set */
+}
+
+.review-card {
+  flex: 0 0 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 28px 24px;
+  color: var(--ink-soft);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.review-card:hover, .review-card:focus { transform: translateY(-4px); box-shadow: var(--shadow-lg); color: var(--ink-soft); }
+.review-card q { flex: 1; font-size: 16px; line-height: 1.6; quotes: "\201C" "\201D"; }
+.review-card .review-by { font-weight: 600; font-size: 14px; color: var(--ink); }
+
+.review-sources {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.review-sources a {
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.review-sources a:hover { border-color: var(--teal); color: var(--teal-dark); }
+.review-sources .fa { margin-right: 5px; }
+
+/* Reduced motion: no auto-scroll, swipe/scroll sideways instead */
+@media (prefers-reduced-motion: reduce) {
+  .review-marquee { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .review-track { animation: none; }
+  .review-track [data-clone] { display: none; }
+}
+
+@media (max-width: 767px) {
+  .reviews { margin-top: 64px; }
+  .reviews-head h3 { font-size: 24px; }
+  .review-card { flex-basis: 280px; padding: 24px 22px 20px; }
+}
 
 .team-note {
   text-align: center;

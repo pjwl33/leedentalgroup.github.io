@@ -77,6 +77,13 @@
 
         <!-- Header -->
         <header class="hero">
+            <!-- Crossfading background photos. To add one, drop a landscape
+                 image (~1920px wide) in img/hero/ and add another .hero-slide
+                 line with its path in data-bg. The first slide loads immediately. -->
+            <div class="hero-slides" aria-hidden="true">
+                <div class="hero-slide is-active" style="background-image: url('img/header-bg.jpg');"></div>
+                <div class="hero-slide" data-bg="img/about/reception.jpg"></div>
+            </div>
             <div class="container">
                 <div class="hero-content">
                     <span class="eyebrow">Welcome to Lee Dental Group <span lang="ko">이영주치과</span></span>
@@ -177,6 +184,11 @@
                             <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> Seoul National University</li>
                             <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> University of Michigan Prosthodontics</li>
                         </ul>
+                        <a class="team-quote" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                            <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                            <q>There's hardly any reviews because no one wants to share her. She's wonderful.</q>
+                            <span class="quote-by">Susan T. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google review</span></span>
+                        </a>
                     </div>
                 </div>
 
@@ -190,6 +202,47 @@
                         <img src="img/team/kristiana.jpg" class="portrait" alt="Cristiana Urs">
                         <h4>Cristiana Urs</h4>
                         <p>Dental Hygienist</p>
+                        <!-- A review that names this person can go here, same markup as Dr. Lee's:
+                        <a class="team-quote" href="REVIEW_LINK" target="_blank" rel="noopener">
+                            <span class="stars" aria-label="5 out of 5 stars">5 × <i class="fa fa-star"></i></span>
+                            <q>Review text</q>
+                            <span class="quote-by">First L. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google review</span></span>
+                        </a> -->
+                    </div>
+                </div>
+
+                <!-- Patient reviews: auto-scrolling feed. Each card links to its source.
+                     To add a review, copy a .review-card <a> and change the text, name,
+                     source icon (fa-google / fa-yelp) and link. -->
+                <div class="reviews">
+                    <div class="reviews-head">
+                        <span class="eyebrow">Kind words</span>
+                        <h3>What our patients say</h3>
+                    </div>
+                    <div class="review-marquee">
+                        <div class="review-track">
+                            <a class="review-card" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                                <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                                <q>Best dentist I have ever been to. Absolutely amazing. &hellip; Highly recommend.</q>
+                                <span class="review-by">Paul M. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
+                            </a>
+                            <a class="review-card" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                                <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                                <q>There's hardly any reviews because no one wants to share her. She's wonderful.</q>
+                                <span class="review-by">Susan T. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
+                            </a>
+                            <a class="review-card" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
+                                <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                                <q>Fast and friendly service.</q>
+                                <span class="review-by">Gina C. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google</span></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="review-sources">
+                        <span>Read more reviews on</span>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener"><i class="fa fa-google" aria-hidden="true"></i> Google</a>
+                        <a href="https://www.yelp.com/biz/lee-dental-group-farmington-hills" target="_blank" rel="noopener"><i class="fa fa-yelp" aria-hidden="true"></i> Yelp</a>
+                        <a href="https://reviews.birdeye.com/lee-dental-group-177322611112690" target="_blank" rel="noopener"><i class="fa fa-commenting" aria-hidden="true"></i> Birdeye</a>
                     </div>
                 </div>
 
