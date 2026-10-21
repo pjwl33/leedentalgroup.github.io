@@ -29,20 +29,58 @@ $(document).ready(function() {
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Hero background crossfade: load each slide's photo, then rotate.
-  var $slides = $('.hero-slide');
-  $slides.each(function() {
-    var src = this.getAttribute('data-bg');
-    if (src) this.style.backgroundImage = "url('" + src + "')";
-  });
-  if ($slides.length > 1 && !reduceMotion) {
-    var current = 0;
+  // Hero background carousel: slide left to the next photo every few
+  // seconds. A copy of the first photo sits at the end so the loop wraps
+  // around seamlessly.
+  var track = document.querySelector('.hero-track');
+  if (track && track.children.length > 1 && !reduceMotion) {
+    var total = track.children.length;
+    var first = track.children[0].cloneNode(true);
+    first.removeAttribute('loading');
+    track.appendChild(first);
+
+    var index = 0;
+    var goTo = function(i, animate) {
+      track.classList.toggle('is-sliding', animate);
+      track.style.transform = 'translateX(' + (-i * 100) + '%)';
+    };
+    track.addEventListener('transitionend', function(e) {
+      if (e.target !== track) return;
+      if (index === total) {           // landed on the copy: jump back to the real first photo
+        index = 0;
+        goTo(0, false);
+      }
+    });
     setInterval(function() {
       if (document.hidden) return;
-      $slides.eq(current).removeClass('is-active');
-      current = (current + 1) % $slides.length;
-      $slides.eq(current).addClass('is-active');
-    }, 6500);
+      index += 1;
+      goTo(index, true);
+    }, 6000);
+  }
+
+  // Fade cards in the first time their section scrolls into view (also when
+  // jumping there from the top menu). Cards in the same row are staggered.
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var groups = [
+      $('#services .service-card'),
+      $('#team .doctor-card'),
+      $('#team .team-card')
+    ];
+    document.documentElement.classList.add('js-reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);   // only animate the first time
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    groups.forEach(function($group) {
+      $group.each(function(i) {
+        this.classList.add('reveal');
+        this.style.setProperty('--reveal-index', i);
+        observer.observe(this);
+      });
+    });
   }
 
   // Review feed: repeat the cards until one set is wider than the strip,

@@ -77,12 +77,14 @@
 
         <!-- Header -->
         <header class="hero">
-            <!-- Crossfading background photos. To add one, drop a landscape
-                 image (~1920px wide) in img/hero/ and add another .hero-slide
-                 line with its path in data-bg. The first slide loads immediately. -->
-            <div class="hero-slides" aria-hidden="true">
-                <div class="hero-slide is-active" style="background-image: url('img/header-bg.jpg');"></div>
-                <div class="hero-slide" data-bg="img/about/reception.jpg"></div>
+            <!-- Background photo carousel (decorative, not clickable).
+                 To add a photo: put a landscape image (~1920px wide) in
+                 img/header-imgs/ and add another <img> line below. -->
+            <div class="hero-carousel" aria-hidden="true">
+                <div class="hero-track">
+                    <img src="img/header-bg.jpg" alt="">
+                    <img src="img/about/reception.jpg" alt="" loading="lazy">
+                </div>
             </div>
             <div class="container">
                 <div class="hero-content">
