@@ -77,12 +77,22 @@
 
         <!-- Header -->
         <header class="hero">
-            <!-- Crossfading background photos. To add one, drop a landscape
-                 image (~1920px wide) in img/hero/ and add another .hero-slide
-                 line with its path in data-bg. The first slide loads immediately. -->
-            <div class="hero-slides" aria-hidden="true">
-                <div class="hero-slide is-active" style="background-image: url('img/header-bg.jpg');"></div>
-                <div class="hero-slide" data-bg="img/about/reception.jpg"></div>
+            <!-- Background photo carousel (decorative, not clickable).
+                 To add a photo: put a landscape image (~1920px wide) in
+                 img/header-imgs/ and add another <img> line below. -->
+            <div class="hero-carousel" aria-hidden="true">
+                <div class="hero-track">
+                    <img src="img/header-imgs/header-bg.jpg" alt="">
+                    <img src="img/header-imgs/o (1).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (2).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (3).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (4).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (5).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (6).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (7).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o (8).jpg" alt="" loading="lazy">
+                    <img src="img/header-imgs/o.jpg" alt="" loading="lazy">
+                </div>
             </div>
             <div class="container">
                 <div class="hero-content">
@@ -186,8 +196,8 @@
                         </ul>
                         <a class="team-quote" href="https://www.google.com/maps/search/?api=1&amp;query=Lee+Dental+Group+Farmington+Hills&amp;query_place_id=ChIJq6pqppewJIgRHT-Gt9IXsEA" target="_blank" rel="noopener">
                             <span class="stars" aria-label="5 out of 5 stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
-                            <q>There's hardly any reviews because no one wants to share her. She's wonderful.</q>
-                            <span class="quote-by">Susan T. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google review</span></span>
+                            <q>Best dentist I have ever been to. Absolutely amazing. &hellip; Highly recommend.</q>
+                            <span class="quote-by">Paul M. <span class="via"><i class="fa fa-google" aria-hidden="true"></i> Google review</span></span>
                         </a>
                     </div>
                 </div>
