@@ -29,33 +29,30 @@ $(document).ready(function() {
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Hero background carousel: slide left to the next photo every few
-  // seconds. A copy of the first photo sits at the end so the loop wraps
-  // around seamlessly.
-  var track = document.querySelector('.hero-track');
-  if (track && track.children.length > 1 && !reduceMotion) {
-    var total = track.children.length;
-    var first = track.children[0].cloneNode(true);
-    first.removeAttribute('loading');
-    track.appendChild(first);
-
-    var index = 0;
-    var goTo = function(i, animate) {
-      track.classList.toggle('is-sliding', animate);
-      track.style.transform = 'translateX(' + (-i * 100) + '%)';
-    };
-    track.addEventListener('transitionend', function(e) {
-      if (e.target !== track) return;
-      if (index === total) {           // landed on the copy: jump back to the real first photo
-        index = 0;
-        goTo(0, false);
-      }
-    });
-    setInterval(function() {
-      if (document.hidden) return;
-      index += 1;
-      goTo(index, true);
-    }, 6000);
+  // Hero background: each photo fades in over the previous one and slowly
+  // zooms out while it's showing. Reduced-motion visitors keep the first photo.
+  var heroPhotos = $('.hero-track img');
+  if (heroPhotos.length && !reduceMotion) {
+    var current = 0;
+    // First photo: keep it visible (no flash), start it zoomed in, then let
+    // it ease out like the rest.
+    var first = heroPhotos[0];
+    first.style.transition = 'none';
+    first.style.opacity = '1';
+    first.style.transform = 'scale(var(--hero-zoom-from))';
+    $('.hero').addClass('js-hero');
+    void first.offsetWidth; // apply the starting zoom before animating
+    first.classList.add('is-active');
+    first.style.transition = first.style.opacity = first.style.transform = '';
+    if (heroPhotos.length > 1) {
+      setInterval(function() {
+        if (document.hidden) return;
+        var next = (current + 1) % heroPhotos.length;
+        heroPhotos.eq(next).addClass('is-active');
+        heroPhotos.eq(current).removeClass('is-active');
+        current = next;
+      }, 6500);
+    }
   }
 
   // Fade cards in the first time their section scrolls into view (also when

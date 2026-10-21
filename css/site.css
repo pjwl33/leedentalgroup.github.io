@@ -24,7 +24,9 @@
   --shadow: 0 12px 32px rgba(34, 34, 34, 0.08);
   --shadow-lg: 0 24px 60px rgba(34, 34, 34, 0.16);
 
-  --hero-slide-speed: 1.4s;
+  --hero-fade-speed: 1.8s;
+  --hero-zoom-from: 1.08;
+  --hero-zoom-duration: 8s;
   --reveal-speed: 0.7s;
   --reveal-distance: 28px;
   --reveal-stagger: 120ms;
@@ -263,7 +265,8 @@ a:hover, a:focus { color: var(--teal-dark); text-decoration: none; outline: none
   overflow: hidden;
 }
 
-/* Background photo carousel (slid by js/app.js) */
+/* Background photos: each one fades in over the last while slowly
+   zooming out (rotated by js/app.js). Decorative and not clickable. */
 .hero-carousel {
   position: absolute;
   inset: 0;
@@ -272,19 +275,32 @@ a:hover, a:focus { color: var(--teal-dark); text-decoration: none; outline: none
   pointer-events: none;
   user-select: none;
 }
-.hero-track {
-  display: flex;
-  height: 100%;
-  will-change: transform;
-}
-.hero-track.is-sliding { transition: transform var(--hero-slide-speed) cubic-bezier(0.65, 0, 0.35, 1); }
+.hero-track { position: absolute; inset: 0; }
 .hero-track img {
-  flex: 0 0 100%;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
+  opacity: 0;
+  transform: scale(var(--hero-zoom-from));
+  /* Fading out: drop opacity, then quietly reset the zoom once hidden */
+  transition:
+    opacity var(--hero-fade-speed) ease-in-out,
+    transform 0s linear var(--hero-fade-speed);
+}
+/* Without JS, just show the first photo */
+.hero-track img:first-child { opacity: 1; transform: none; }
+.js-hero .hero-track img:first-child { opacity: 0; transform: scale(var(--hero-zoom-from)); }
+.js-hero .hero-track img.is-active {
+  z-index: 1;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity var(--hero-fade-speed) ease-in-out,
+    transform var(--hero-zoom-duration) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* Dark teal-tinted overlay above the photos so the text stays readable */
