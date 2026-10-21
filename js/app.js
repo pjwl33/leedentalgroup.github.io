@@ -103,7 +103,9 @@ $(document).ready(function() {
     cloneInto(Array.prototype.slice.call(track.children));
 
     // Keep a steady reading speed (~30px/s) whatever the number of reviews.
-    var seconds = Math.max(20, Math.round(track.scrollWidth / 2 / 30));
+    // Yelp's widgets size themselves after loading, so estimate each card
+    // at ~350px rather than measuring now.
+    var seconds = Math.max(20, Math.round(track.children.length / 2 * 350 / 30));
     track.style.setProperty('--review-duration', seconds + 's');
   });
 
